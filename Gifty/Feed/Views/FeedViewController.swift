@@ -17,6 +17,7 @@ class FeedViewController: UICollectionViewController {
       right: 20.0)
     private let itemsPerRow: CGFloat = 2
     
+    // TODO: Replace with real data
     let items: [Int] = [1,2,3,4,5,6,7,9,10]
 
     override func viewDidLoad() {
@@ -61,7 +62,7 @@ extension FeedViewController {
       }
 }
 
-// MARK:
+// MARK: Flow Layout
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
       _ collectionView: UICollectionView,

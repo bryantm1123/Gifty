@@ -16,6 +16,12 @@
 		9237E5E22674490100FC0FC8 /* GiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5E12674490100FC0FC8 /* GiftyUITests.swift */; };
 		9237E5F526744A5700FC0FC8 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5F426744A5700FC0FC8 /* FeedViewController.swift */; };
 		9237E5F726744AA300FC0FC8 /* GifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5F626744AA300FC0FC8 /* GifCell.swift */; };
+		9237E5F92674520F00FC0FC8 /* TrendingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5F82674520F00FC0FC8 /* TrendingResponse.swift */; };
+		9237E5FB267453FA00FC0FC8 /* TrendingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5FA267453FA00FC0FC8 /* TrendingService.swift */; };
+		9237E5FD26745C4000FC0FC8 /* TrendingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5FC26745C4000FC0FC8 /* TrendingServiceTests.swift */; };
+		9237E60026745C6A00FC0FC8 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5FF26745C6A00FC0FC8 /* MockURLProtocol.swift */; };
+		9237E6032674601B00FC0FC8 /* ServiceResponseStubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E6022674601B00FC0FC8 /* ServiceResponseStubber.swift */; };
+		9237E6052674633000FC0FC8 /* SampleTrendingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 9237E6042674633000FC0FC8 /* SampleTrendingResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +57,12 @@
 		9237E5E32674490100FC0FC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9237E5F426744A5700FC0FC8 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9237E5F626744AA300FC0FC8 /* GifCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCell.swift; sourceTree = "<group>"; };
+		9237E5F82674520F00FC0FC8 /* TrendingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingResponse.swift; sourceTree = "<group>"; };
+		9237E5FA267453FA00FC0FC8 /* TrendingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingService.swift; sourceTree = "<group>"; };
+		9237E5FC26745C4000FC0FC8 /* TrendingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingServiceTests.swift; sourceTree = "<group>"; };
+		9237E5FF26745C6A00FC0FC8 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		9237E6022674601B00FC0FC8 /* ServiceResponseStubber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResponseStubber.swift; sourceTree = "<group>"; };
+		9237E6042674633000FC0FC8 /* SampleTrendingResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleTrendingResponse.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +127,9 @@
 		9237E5D52674490100FC0FC8 /* GiftyTests */ = {
 			isa = PBXGroup;
 			children = (
+				9237E60126745FB100FC0FC8 /* Utilities */,
+				9237E5FE26745C4B00FC0FC8 /* Resources */,
+				9237E5FC26745C4000FC0FC8 /* TrendingServiceTests.swift */,
 				9237E5D62674490100FC0FC8 /* GiftyTests.swift */,
 				9237E5D82674490100FC0FC8 /* Info.plist */,
 			);
@@ -167,8 +182,27 @@
 		9237E5F326744A2E00FC0FC8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9237E5F82674520F00FC0FC8 /* TrendingResponse.swift */,
+				9237E5FA267453FA00FC0FC8 /* TrendingService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		9237E5FE26745C4B00FC0FC8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9237E6042674633000FC0FC8 /* SampleTrendingResponse.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9237E60126745FB100FC0FC8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9237E5FF26745C6A00FC0FC8 /* MockURLProtocol.swift */,
+				9237E6022674601B00FC0FC8 /* ServiceResponseStubber.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9237E6052674633000FC0FC8 /* SampleTrendingResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,9 +336,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9237E5FB267453FA00FC0FC8 /* TrendingService.swift in Sources */,
 				9237E5C0267448FF00FC0FC8 /* AppDelegate.swift in Sources */,
 				9237E5F526744A5700FC0FC8 /* FeedViewController.swift in Sources */,
 				9237E5F726744AA300FC0FC8 /* GifCell.swift in Sources */,
+				9237E5F92674520F00FC0FC8 /* TrendingResponse.swift in Sources */,
 				9237E5C2267448FF00FC0FC8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +349,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9237E60026745C6A00FC0FC8 /* MockURLProtocol.swift in Sources */,
+				9237E5FD26745C4000FC0FC8 /* TrendingServiceTests.swift in Sources */,
+				9237E6032674601B00FC0FC8 /* ServiceResponseStubber.swift in Sources */,
 				9237E5D72674490100FC0FC8 /* GiftyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
