@@ -23,13 +23,6 @@ class FeedViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
     }
 
 }
@@ -41,23 +34,23 @@ extension FeedViewController {
       }
       
       // 2
-      override func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-      ) -> Int {
+      override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
       }
       
       // 3
-      override func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-      ) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-          withReuseIdentifier: reuseIdentifier,
-          for: indexPath)
+      override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:reuseIdentifier, for:indexPath) as? GifCell else {
+            return UICollectionViewCell()
+        }
+        
         cell.backgroundColor = .black
-        // Configure the cell
+        if let url = URL(string: "https://media0.giphy.com/media/LGBKlgMCKQbkDKcG4t/200.gif?cid=85160a202d2eufbrqkk5wob4gkd35cmwso6twdmqqvcc86pz&rid=200.gif&ct=g") {
+            cell.configure(with: url)
+        }
+        
+        
         return cell
       }
 }
