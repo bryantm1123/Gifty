@@ -6,23 +6,27 @@
 //
 
 import UIKit
+import FLAnimatedImage
 
 class FeedViewController: UICollectionViewController {
     
-    private let reuseIdentifier = "GifCell"
-    private let sectionInsets = UIEdgeInsets(
-      top: 50.0,
-      left: 20.0,
-      bottom: 50.0,
-      right: 20.0)
-    private let itemsPerRow: CGFloat = 2
+    private let reuseIdentifier: String  = "GifCell"
+    private let imageLoader: ImageLoader = ImageLoader()
+    private let sectionInsets: UIEdgeInsets = UIEdgeInsets(
+      top: 5.0,
+      left: 10.0,
+      bottom: 5.0,
+      right: 10.0)
     
-    // TODO: Replace with real data
-    let items: [Int] = [1,2,3,4,5,6,7,9,10]
+    
+    var presenter: FeedPresenter?
+    var service: TrendingService = TrendingService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        presenter = FeedPresenter(with: service, delegate: self)
+        presenter?.getTrendingGifs(true)
     }
 
 }
@@ -33,55 +37,98 @@ extension FeedViewController {
         return 1
       }
       
-      // 2
       override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return presenter?.gifs.count ?? 0
       }
       
-      // 3
       override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:reuseIdentifier, for:indexPath) as? GifCell else {
             return UICollectionViewCell()
         }
         
-        cell.backgroundColor = .black
-        if let url = URL(string: "https://media0.giphy.com/media/LGBKlgMCKQbkDKcG4t/200.gif?cid=85160a202d2eufbrqkk5wob4gkd35cmwso6twdmqqvcc86pz&rid=200.gif&ct=g") {
-            cell.configure(with: url)
+        
+        let gif = presenter?.gifs[indexPath.row]
+        
+        if let urlString = gif?.images.fixedWidth.url {
+            loadAnimatedGifFrom(urlString: urlString, cell)
         }
         
-        
         return cell
+
       }
 }
 
 // MARK: Flow Layout
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(
-      _ collectionView: UICollectionView,
-      layout collectionViewLayout: UICollectionViewLayout,
-      sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-      let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-      let availableWidth = view.frame.width - paddingSpace
-      let widthPerItem = availableWidth / itemsPerRow
-      
-      return CGSize(width: widthPerItem, height: widthPerItem)
-    }
     
-    func collectionView(
-      _ collectionView: UICollectionView,
-      layout collectionViewLayout: UICollectionViewLayout,
-      insetForSectionAt section: Int
-    ) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
       return sectionInsets
     }
     
-    func collectionView(
-      _ collectionView: UICollectionView,
-      layout collectionViewLayout: UICollectionViewLayout,
-      minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
       return sectionInsets.left
+    }
+}
+
+extension FeedViewController: GifDeliveryDelegate {
+    
+    func didReceiveGifs(with newIndexPathsToReload: [IndexPath]?) {
+        DispatchQueue.main.async { [weak self] in
+            // Reload the whole collection view the first time
+            guard let pathsToReload = newIndexPathsToReload else {
+                self?.collectionView.reloadData()
+                return
+            }
+            // On subsequent fetches, reload only the index paths
+            // for the new photos
+            self?.collectionView.reloadItems(at: pathsToReload)
+        }
+    }
+    
+    func didReceiveError() {
+        // TODO: Implement
+    }
+    
+}
+
+// MARK: Remote Image Loader
+extension FeedViewController {
+    
+    /// Loads an FLAnimatedImage from a remote url using the `ImageLoader` helper class
+    /// Updates the cell's image view with the animated image retrieved
+    /// - Parameters:
+    ///   - urlString: The url string for the remote gif resource
+    ///   - cell: The cell for the current index path which displays the gif
+    fileprivate func loadAnimatedGifFrom(urlString: String, _ cell: GifCell) {
+        // load image from URL
+        if let url = URL(string: urlString) {
+            let token = imageLoader.loadImage(from: url, completion: { result in
+                
+                do {
+                    // Extract the result from the
+                    // completion handler
+                    let image = try result.get()
+                    
+                    // If image extracted, dispatch
+                    // to main queue for updating cell
+                    DispatchQueue.main.async {
+                        cell.gifImageView.animatedImage = image
+                    }
+                } catch {
+                    // TODO: Handle error case
+                    // Here we could show a placeholder image.
+                    debugPrint(error)
+                }
+            })
+            
+            // Cancel the data task when the cell is reused
+            // if the image is in cache
+            cell.onReuse = {
+                if let token = token {
+                    self.imageLoader.cancelLoad(for: token)
+                }
+            }
+        }
     }
 }
