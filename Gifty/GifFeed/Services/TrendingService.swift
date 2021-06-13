@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Calls the Giphy /trending endpoint
 class TrendingService {
     
     private var session: URLSession?

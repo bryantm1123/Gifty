@@ -154,7 +154,7 @@
 			children = (
 				9237E60F26769B3700FC0FC8 /* DetailView */,
 				9237E60A267569B800FC0FC8 /* Utilities */,
-				9237E5EF267449FB00FC0FC8 /* Feed */,
+				9237E5EF267449FB00FC0FC8 /* GifFeed */,
 				9237E5BF267448FF00FC0FC8 /* AppDelegate.swift */,
 				9237E5C1267448FF00FC0FC8 /* SceneDelegate.swift */,
 				9237E5C5267448FF00FC0FC8 /* Main.storyboard */,
@@ -186,7 +186,7 @@
 			path = GiftyUITests;
 			sourceTree = "<group>";
 		};
-		9237E5EF267449FB00FC0FC8 /* Feed */ = {
+		9237E5EF267449FB00FC0FC8 /* GifFeed */ = {
 			isa = PBXGroup;
 			children = (
 				9237E5F326744A2E00FC0FC8 /* Services */,
@@ -194,7 +194,7 @@
 				9237E5F126744A1F00FC0FC8 /* Models */,
 				9237E5F026744A1500FC0FC8 /* Views */,
 			);
-			path = Feed;
+			path = GifFeed;
 			sourceTree = "<group>";
 		};
 		9237E5F026744A1500FC0FC8 /* Views */ = {
@@ -209,6 +209,7 @@
 		9237E5F126744A1F00FC0FC8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9237E5F82674520F00FC0FC8 /* TrendingResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,7 +226,6 @@
 		9237E5F326744A2E00FC0FC8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				9237E5F82674520F00FC0FC8 /* TrendingResponse.swift */,
 				9237E5FA267453FA00FC0FC8 /* TrendingService.swift */,
 			);
 			path = Services;
@@ -261,7 +261,6 @@
 		9237E60F26769B3700FC0FC8 /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
-				9237E61126769B5100FC0FC8 /* Presenter */,
 				9237E61026769B4900FC0FC8 /* Views */,
 			);
 			path = DetailView;
@@ -273,13 +272,6 @@
 				9237E61226769B7000FC0FC8 /* DetailViewController.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		9237E61126769B5100FC0FC8 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		C2440FC6BB68C3BB2C1A2C58 /* Pods */ = {
