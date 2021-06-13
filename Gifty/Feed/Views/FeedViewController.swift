@@ -25,6 +25,7 @@ class FeedViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.prefetchDataSource = self
         presenter = FeedPresenter(with: service, delegate: self)
         presenter?.getTrendingGifs(true)
     }
@@ -33,12 +34,9 @@ class FeedViewController: UICollectionViewController {
 
 // MARK: DataSource
 extension FeedViewController {
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-      }
       
       override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.gifs.count ?? 0
+        return presenter?.totalCount ?? 0
       }
       
       override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -48,15 +46,33 @@ extension FeedViewController {
         }
         
         
-        let gif = presenter?.gifs[indexPath.row]
-        
-        if let urlString = gif?.images.fixedWidth.url {
-            loadAnimatedGifFrom(urlString: urlString, cell)
+        if !isLoadingCell(for: indexPath) {
+            
+            let gif = presenter?.gifs[indexPath.row]
+            
+//            if let urlString = gif?.images.fixedWidth.url {
+//                loadAnimatedGifFrom(urlString: urlString, cell)
+//            }
+            
+            if let urlString = gif?.images.fixedWidth.url,
+               let url = URL(string: urlString) {
+                cell.configure(with: url)
+            }
         }
         
         return cell
-
       }
+}
+
+// MARK: Prefetching delegate
+extension FeedViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        // Go ahead and pre-fetch next page photos
+        // when we get to the loading cell
+        if indexPaths.contains(where: isLoadingCell) {
+            presenter?.getTrendingGifs()
+        }
+    }
 }
 
 // MARK: Flow Layout
@@ -87,7 +103,13 @@ extension FeedViewController: GifDeliveryDelegate {
     }
     
     func didReceiveError() {
-        // TODO: Implement
+        let tryAgain: UIAlertAction = UIAlertAction(title: "Try Again", style: .default, handler: { action in
+            self.presenter?.getTrendingGifs()
+        })
+        
+        let ok: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        showAlert(with: "Oops!", message: "Something went wrong. Please try again.", style: .alert, actions: [ok, tryAgain])
     }
     
 }
@@ -101,34 +123,50 @@ extension FeedViewController {
     ///   - urlString: The url string for the remote gif resource
     ///   - cell: The cell for the current index path which displays the gif
     fileprivate func loadAnimatedGifFrom(urlString: String, _ cell: GifCell) {
-        // load image from URL
-        if let url = URL(string: urlString) {
-            let token = imageLoader.loadImage(from: url, completion: { result in
-                
-                do {
-                    // Extract the result from the
-                    // completion handler
-                    let image = try result.get()
-                    
-                    // If image extracted, dispatch
-                    // to main queue for updating cell
-                    DispatchQueue.main.async {
-                        cell.gifImageView.animatedImage = image
-                    }
-                } catch {
-                    // TODO: Handle error case
-                    // Here we could show a placeholder image.
-                    debugPrint(error)
-                }
-            })
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        let token = imageLoader.loadImage(from: url, completion: { result in
             
-            // Cancel the data task when the cell is reused
-            // if the image is in cache
-            cell.onReuse = {
-                if let token = token {
-                    self.imageLoader.cancelLoad(for: token)
+            do {
+                let image = try result.get()
+                DispatchQueue.main.async {
+                    cell.gifImageView.animatedImage = image
                 }
+            } catch {
+                // TODO: Handle error case
+                // Here we could show a placeholder image.
+                debugPrint(error)
+            }
+        })
+        
+        cell.onReuse = {
+            if let token = token {
+                self.imageLoader.cancelLoad(for: token)
             }
         }
     }
+}
+
+// MARK: Prefetching utility functions
+private extension FeedViewController {
+    
+    /// Determines if the current indexPath is beyond the current count of photos, ie the last cell
+    /// - Parameter indexPath: The current index path to check
+    /// - Returns: Boolean to indicate if index path is the loading cell
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= presenter?.currentCount ?? 0
+    }
+
+    
+    /// Calculates the collection view cells that need to be reloaded when receiving a new page
+    /// by calculating the intersection of indexPaths passed in (as calculated by the presenter)
+    /// with the visible indexPaths
+    /// - Parameter indexPaths: Index paths that may need to be reloaded
+    /// - Returns: the visible index paths to reload
+   func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleRows = collectionView.indexPathsForVisibleItems
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
+   }
 }
