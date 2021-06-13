@@ -31,7 +31,7 @@ class FeedViewController: UICollectionViewController, RemoteImageLoader {
         
         activityIndicator.startAnimating()
         presenter = FeedPresenter(with: service, delegate: self)
-        presenter?.getTrendingGifs(true)
+        presenter?.getTrendingGifs()
     }
 
 }

@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol FeedPresenterLogic {
-    var gifs: [GifRawData] { get }
-}
-
 class FeedPresenter: FeedPresenterLogic {
     
     var gifs: [GifRawData] = []
@@ -32,7 +28,7 @@ class FeedPresenter: FeedPresenterLogic {
         self.gifDeliveryDelegate = delegate
     }
     
-    func getTrendingGifs(_ onInitialLoad: Bool = false) {
+    func getTrendingGifs() {
         
         guard !isRequestInProgress else { return }
         
