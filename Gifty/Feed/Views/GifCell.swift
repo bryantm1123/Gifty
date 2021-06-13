@@ -21,16 +21,8 @@ class GifCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        onReuse()
         gifImageView.animatedImage = nil
-    }
-    
-    public func configure(with imageUrl : URL) {
-        if let data = try? Data(contentsOf: imageUrl) {
-            let animatedData = FLAnimatedImage(animatedGIFData: data)
-            DispatchQueue.main.async { [weak self] in
-                self?.gifImageView.animatedImage = animatedData
-            }
-        }
     }
     
 }

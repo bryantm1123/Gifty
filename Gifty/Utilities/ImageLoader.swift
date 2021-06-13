@@ -14,8 +14,13 @@ import FLAnimatedImage
 ///
 /// Implementation  adapted from Donny Wals: https://www.donnywals.com/efficiently-loading-images-in-table-views-and-collection-views/
 class ImageLoader {
-    private var loadedImages = [URL : FLAnimatedImage]()
+    
+    private var cachedImages = NSCache<NSURL, FLAnimatedImage>()
     private var runningRequests = [UUID : URLSessionDataTask]()
+    
+    init() {
+        cachedImages.countLimit = 300
+    }
     
     
     /// Loads an FLAnimatedImage from a given url either from cache
@@ -29,7 +34,7 @@ class ImageLoader {
         // Check if image is already loaded using the url as a key
         // If so, call the completion handler and return nil
         // for the UUID since there is no active task to cancel
-        if let image = loadedImages[url] {
+        if let image = cachedImages.object(forKey: url as NSURL) {
             completion(.success(image))
             return nil
         }
@@ -46,11 +51,11 @@ class ImageLoader {
             defer { self.runningRequests.removeValue(forKey: uuid) }
             
             // When the data task completes, we're able to extract an image
-            // it is then stored in the in-memory cache
+            // it is then stored in the cache
             // and completion is called with the loaded image
             if let dataReturned = data,
                let animatedData = FLAnimatedImage(animatedGIFData: dataReturned) {
-                self.loadedImages[url] = animatedData
+                self.cachedImages.setObject(animatedData, forKey: url as NSURL)
                 completion(.success(animatedData))
                 return
             }

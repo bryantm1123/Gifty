@@ -50,13 +50,8 @@ extension FeedViewController {
             
             let gif = presenter?.gifs[indexPath.row]
             
-//            if let urlString = gif?.images.fixedWidth.url {
-//                loadAnimatedGifFrom(urlString: urlString, cell)
-//            }
-            
-            if let urlString = gif?.images.fixedWidth.url,
-               let url = URL(string: urlString) {
-                cell.configure(with: url)
+            if let urlString = gif?.images.fixedWidth.url {
+                loadAnimatedGifFrom(urlString: urlString, cell)
             }
         }
         

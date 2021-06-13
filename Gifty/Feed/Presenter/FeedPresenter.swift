@@ -19,7 +19,6 @@ class FeedPresenter: FeedPresenterLogic {
     private var trendingService: TrendingService?
     private var pageLimit: Int = 25
     private var currentPage: Int = 0
-    private var initialLoadPageCount: Int = 25
     private var total: Int = 25
     private var isRequestInProgress: Bool = false
     private var rating = "g" // this could be updated via a function powered by a filter option on the feed view controller. but for now, just hard-coding to family friendly content
@@ -48,11 +47,12 @@ class FeedPresenter: FeedPresenterLogic {
                 self.isRequestInProgress = false
                 
                 // https://github.com/Giphy/GiphyAPI/issues/235
-                // The /trending API returns a lot of duplicates
-                // This temp fix below will resolve duplicates within the same
+                // I noticed that the /trending API returns some duplicates
+                // This temp fix below attempts to resolve duplicates within the same
                 // paginated response, but doesn't resolve duplicates
                 // in the array as a whole.
                 guard let uniqueNewGifs = Array(NSOrderedSet(array: response.data)) as? [GifRawData] else { return }
+                
                 self.gifs.append(contentsOf: uniqueNewGifs)
 
                 if response.pagination.offset > 0 {
