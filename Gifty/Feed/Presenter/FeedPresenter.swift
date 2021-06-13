@@ -36,8 +36,6 @@ class FeedPresenter: FeedPresenterLogic {
         
         guard !isRequestInProgress else { return }
         
-        
-        // TODO: increment initial load batch
         trendingService?.getTrending(with: pageLimit, page: currentPage, rating: rating, completion: { result in
             switch result {
             case .success(let response):
@@ -50,7 +48,7 @@ class FeedPresenter: FeedPresenterLogic {
                 // I noticed that the /trending API returns some duplicates
                 // This temp fix below attempts to resolve duplicates within the same
                 // paginated response, but doesn't resolve duplicates
-                // in the array as a whole.
+                // in the master gif array.
                 guard let uniqueNewGifs = Array(NSOrderedSet(array: response.data)) as? [GifRawData] else { return }
                 
                 self.gifs.append(contentsOf: uniqueNewGifs)
@@ -67,8 +65,8 @@ class FeedPresenter: FeedPresenterLogic {
         })
     }
     
-    /// Calculates the index paths for the last page of photos received from the API.
-    /// - Parameter newPhotos: The last page of photos received
+    /// Calculates the index paths for the last page of gifs received from the API.
+    /// - Parameter newPhotos: The last page of gifs received
     /// - Returns: The indexPaths to reload on the collection view
     private func calculateIndexPathsToReload(from newGifs: [GifRawData]) -> [IndexPath] {
         let startIndex = gifs.count - newGifs.count

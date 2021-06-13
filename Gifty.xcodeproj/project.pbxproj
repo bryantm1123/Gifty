@@ -27,6 +27,8 @@
 		9237E607267552F900FC0FC8 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E606267552F900FC0FC8 /* FeedPresenter.swift */; };
 		9237E60C267569CD00FC0FC8 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E60B267569CD00FC0FC8 /* ImageLoader.swift */; };
 		9237E60E2675751100FC0FC8 /* UIViewController+AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E60D2675751100FC0FC8 /* UIViewController+AlertExtension.swift */; };
+		9237E61326769B7000FC0FC8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E61226769B7000FC0FC8 /* DetailViewController.swift */; };
+		9237E61526769DFE00FC0FC8 /* RemoteImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E61426769DFE00FC0FC8 /* RemoteImageLoader.swift */; };
 		B7691DD01CA9A705A17B240E /* Pods_Gifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743273E24B19F88F02BABAE /* Pods_Gifty.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,8 @@
 		9237E606267552F900FC0FC8 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
 		9237E60B267569CD00FC0FC8 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		9237E60D2675751100FC0FC8 /* UIViewController+AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+AlertExtension.swift"; sourceTree = "<group>"; };
+		9237E61226769B7000FC0FC8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9237E61426769DFE00FC0FC8 /* RemoteImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageLoader.swift; sourceTree = "<group>"; };
 		AE895442B9AD136910F840D1 /* Pods-Gifty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gifty.release.xcconfig"; path = "Target Support Files/Pods-Gifty/Pods-Gifty.release.xcconfig"; sourceTree = "<group>"; };
 		B9FE6B469A27ADE13DAAA67E /* Pods-GiftyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftyTests.release.xcconfig"; path = "Target Support Files/Pods-GiftyTests/Pods-GiftyTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE8A4AAA2B748A5F155EB096 /* Pods_GiftyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +150,7 @@
 		9237E5BE267448FF00FC0FC8 /* Gifty */ = {
 			isa = PBXGroup;
 			children = (
+				9237E60F26769B3700FC0FC8 /* DetailView */,
 				9237E60A267569B800FC0FC8 /* Utilities */,
 				9237E5EF267449FB00FC0FC8 /* Feed */,
 				9237E5BF267448FF00FC0FC8 /* AppDelegate.swift */,
@@ -245,8 +250,33 @@
 			children = (
 				9237E60B267569CD00FC0FC8 /* ImageLoader.swift */,
 				9237E60D2675751100FC0FC8 /* UIViewController+AlertExtension.swift */,
+				9237E61426769DFE00FC0FC8 /* RemoteImageLoader.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		9237E60F26769B3700FC0FC8 /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				9237E61126769B5100FC0FC8 /* Presenter */,
+				9237E61026769B4900FC0FC8 /* Views */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
+		9237E61026769B4900FC0FC8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9237E61226769B7000FC0FC8 /* DetailViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9237E61126769B5100FC0FC8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		C2440FC6BB68C3BB2C1A2C58 /* Pods */ = {
@@ -508,6 +538,8 @@
 				9237E5F92674520F00FC0FC8 /* TrendingResponse.swift in Sources */,
 				9237E607267552F900FC0FC8 /* FeedPresenter.swift in Sources */,
 				9237E60E2675751100FC0FC8 /* UIViewController+AlertExtension.swift in Sources */,
+				9237E61326769B7000FC0FC8 /* DetailViewController.swift in Sources */,
+				9237E61526769DFE00FC0FC8 /* RemoteImageLoader.swift in Sources */,
 				9237E60C267569CD00FC0FC8 /* ImageLoader.swift in Sources */,
 				9237E5C2267448FF00FC0FC8 /* SceneDelegate.swift in Sources */,
 			);

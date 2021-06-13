@@ -70,6 +70,19 @@ extension FeedViewController: UICollectionViewDataSourcePrefetching {
     }
 }
 
+// MARK: Gif item selection
+extension FeedViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let gif = presenter?.gifs[indexPath.row]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailVC = storyboard.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return }
+        detailVC.gif = gif
+        present(detailVC, animated: true, completion: nil)
+    }
+}
+
 // MARK: Flow Layout
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     
@@ -82,6 +95,7 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: GifDeliveryDelegate
 extension FeedViewController: GifDeliveryDelegate {
     
     func didReceiveGifs(with newIndexPathsToReload: [IndexPath]?) {
