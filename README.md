@@ -1,2 +1,2 @@
 # Gifty
-Gifty is a simple gif browser with a detail view connected to the Giphy API
+Gifty is a simple gif browser connected to the Giphy API. Browse gifs and tap your favorites to see them in full screen.
