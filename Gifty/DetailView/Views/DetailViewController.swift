@@ -12,6 +12,7 @@ class DetailViewController: UIViewController, RemoteImageLoader {
 
     @IBOutlet weak var imageView: FLAnimatedImageView!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var gif: GifRawData?
     var imageLoader: ImageLoader = ImageLoader()
@@ -19,6 +20,8 @@ class DetailViewController: UIViewController, RemoteImageLoader {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.startAnimating()
         
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         
@@ -39,6 +42,7 @@ class DetailViewController: UIViewController, RemoteImageLoader {
             do {
                 let image = try result.get()
                 DispatchQueue.main.async {
+                    if self.activityIndicator.isAnimating { self.activityIndicator.stopAnimating()}
                     view.animatedImage = image
                 }
             } catch {

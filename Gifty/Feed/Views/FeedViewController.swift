@@ -8,24 +8,28 @@
 import UIKit
 import FLAnimatedImage
 
-class FeedViewController: UICollectionViewController {
+class FeedViewController: UICollectionViewController, RemoteImageLoader {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     private let reuseIdentifier: String  = "GifCell"
-    private let imageLoader: ImageLoader = ImageLoader()
     private let sectionInsets: UIEdgeInsets = UIEdgeInsets(
       top: 5.0,
-      left: 10.0,
+      left: 20.0,
       bottom: 5.0,
-      right: 10.0)
+      right: 20.0)
     
     
     var presenter: FeedPresenter?
     var service: TrendingService = TrendingService()
+    var imageLoader: ImageLoader = ImageLoader()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Gifty"
         collectionView.prefetchDataSource = self
+        
+        activityIndicator.startAnimating()
         presenter = FeedPresenter(with: service, delegate: self)
         presenter?.getTrendingGifs(true)
     }
@@ -51,7 +55,7 @@ extension FeedViewController {
             let gif = presenter?.gifs[indexPath.row]
             
             if let urlString = gif?.images.fixedWidth.url {
-                loadAnimatedGifFrom(urlString: urlString, cell)
+                loadAnimatedImageFrom(urlString: urlString, on: cell)
             }
         }
         
@@ -100,6 +104,9 @@ extension FeedViewController: GifDeliveryDelegate {
     
     func didReceiveGifs(with newIndexPathsToReload: [IndexPath]?) {
         DispatchQueue.main.async { [weak self] in
+            
+            if self?.activityIndicator.isAnimating ?? false { self?.activityIndicator.stopAnimating() }
+            
             // Reload the whole collection view the first time
             guard let pathsToReload = newIndexPathsToReload else {
                 self?.collectionView.reloadData()
@@ -112,6 +119,7 @@ extension FeedViewController: GifDeliveryDelegate {
     }
     
     func didReceiveError() {
+        if activityIndicator.isAnimating { activityIndicator.stopAnimating() }
         let tryAgain: UIAlertAction = UIAlertAction(title: "Try Again", style: .default, handler: { action in
             self.presenter?.getTrendingGifs()
         })
@@ -131,9 +139,9 @@ extension FeedViewController {
     /// - Parameters:
     ///   - urlString: The url string for the remote gif resource
     ///   - cell: The cell for the current index path which displays the gif
-    fileprivate func loadAnimatedGifFrom(urlString: String, _ cell: GifCell) {
-        
-        guard let url = URL(string: urlString) else { return }
+    func loadAnimatedImageFrom(urlString: String, on view: UIView) {
+        guard let url = URL(string: urlString),
+              let cell = view as? GifCell else { return }
         
         let token = imageLoader.loadImage(from: url, completion: { result in
             
