@@ -30,6 +30,7 @@
 		9237E61526769DFE00FC0FC8 /* RemoteImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E61426769DFE00FC0FC8 /* RemoteImageLoader.swift */; };
 		9237E6172676CEA700FC0FC8 /* FeedPresenterLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E6162676CEA700FC0FC8 /* FeedPresenterLogic.swift */; };
 		9237E6192676D09000FC0FC8 /* FeedPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E6182676D09000FC0FC8 /* FeedPresenterTests.swift */; };
+		9237E61B26780D6F00FC0FC8 /* ContentRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E61A26780D6F00FC0FC8 /* ContentRating.swift */; };
 		B7691DD01CA9A705A17B240E /* Pods_Gifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743273E24B19F88F02BABAE /* Pods_Gifty.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		9237E61426769DFE00FC0FC8 /* RemoteImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageLoader.swift; sourceTree = "<group>"; };
 		9237E6162676CEA700FC0FC8 /* FeedPresenterLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenterLogic.swift; sourceTree = "<group>"; };
 		9237E6182676D09000FC0FC8 /* FeedPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenterTests.swift; sourceTree = "<group>"; };
+		9237E61A26780D6F00FC0FC8 /* ContentRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRating.swift; sourceTree = "<group>"; };
 		AE895442B9AD136910F840D1 /* Pods-Gifty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gifty.release.xcconfig"; path = "Target Support Files/Pods-Gifty/Pods-Gifty.release.xcconfig"; sourceTree = "<group>"; };
 		B9FE6B469A27ADE13DAAA67E /* Pods-GiftyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftyTests.release.xcconfig"; path = "Target Support Files/Pods-GiftyTests/Pods-GiftyTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE8A4AAA2B748A5F155EB096 /* Pods_GiftyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				9237E5F82674520F00FC0FC8 /* TrendingResponse.swift */,
+				9237E61A26780D6F00FC0FC8 /* ContentRating.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9237E5FB267453FA00FC0FC8 /* TrendingService.swift in Sources */,
+				9237E61B26780D6F00FC0FC8 /* ContentRating.swift in Sources */,
 				9237E5C0267448FF00FC0FC8 /* AppDelegate.swift in Sources */,
 				9237E5F526744A5700FC0FC8 /* FeedViewController.swift in Sources */,
 				9237E5F726744AA300FC0FC8 /* GifCell.swift in Sources */,

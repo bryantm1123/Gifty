@@ -17,7 +17,7 @@ class FeedPresenter: FeedPresenterLogic {
     private var currentPage: Int = 0
     private var total: Int = 25
     private var isRequestInProgress: Bool = false
-    private var rating = "g" // this could be updated via a function powered by a filter option on the feed view controller. but for now, just hard-coding to family friendly content
+    private var rating: ContentRating = .g // this could be updated via a function powered by a filter option on the feed view controller. but for now, just hard-coding to family friendly content
     
     var totalCount: Int { total }
     var currentCount: Int { gifs.count }
@@ -32,7 +32,7 @@ class FeedPresenter: FeedPresenterLogic {
         
         guard !isRequestInProgress else { return }
         
-        trendingService?.getTrending(with: pageLimit, page: currentPage, rating: rating, completion: { result in
+        trendingService?.getTrending(with: pageLimit, page: currentPage, rating: rating.rawValue, completion: { result in
             switch result {
             case .success(let response):
                 self.currentPage += 1
