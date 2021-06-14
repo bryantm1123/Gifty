@@ -14,7 +14,6 @@
 		9237E5C7267448FF00FC0FC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9237E5C5267448FF00FC0FC8 /* Main.storyboard */; };
 		9237E5C92674490100FC0FC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9237E5C82674490100FC0FC8 /* Assets.xcassets */; };
 		9237E5CC2674490100FC0FC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9237E5CA2674490100FC0FC8 /* LaunchScreen.storyboard */; };
-		9237E5D72674490100FC0FC8 /* GiftyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5D62674490100FC0FC8 /* GiftyTests.swift */; };
 		9237E5E22674490100FC0FC8 /* GiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5E12674490100FC0FC8 /* GiftyUITests.swift */; };
 		9237E5F526744A5700FC0FC8 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5F426744A5700FC0FC8 /* FeedViewController.swift */; };
 		9237E5F726744AA300FC0FC8 /* GifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5F626744AA300FC0FC8 /* GifCell.swift */; };
@@ -30,6 +29,7 @@
 		9237E61326769B7000FC0FC8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E61226769B7000FC0FC8 /* DetailViewController.swift */; };
 		9237E61526769DFE00FC0FC8 /* RemoteImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E61426769DFE00FC0FC8 /* RemoteImageLoader.swift */; };
 		9237E6172676CEA700FC0FC8 /* FeedPresenterLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E6162676CEA700FC0FC8 /* FeedPresenterLogic.swift */; };
+		9237E6192676D09000FC0FC8 /* FeedPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E6182676D09000FC0FC8 /* FeedPresenterTests.swift */; };
 		B7691DD01CA9A705A17B240E /* Pods_Gifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743273E24B19F88F02BABAE /* Pods_Gifty.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +62,6 @@
 		9237E5CB2674490100FC0FC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9237E5CD2674490100FC0FC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9237E5D22674490100FC0FC8 /* GiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9237E5D62674490100FC0FC8 /* GiftyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftyTests.swift; sourceTree = "<group>"; };
 		9237E5D82674490100FC0FC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9237E5DD2674490100FC0FC8 /* GiftyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9237E5E12674490100FC0FC8 /* GiftyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftyUITests.swift; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		9237E61226769B7000FC0FC8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9237E61426769DFE00FC0FC8 /* RemoteImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageLoader.swift; sourceTree = "<group>"; };
 		9237E6162676CEA700FC0FC8 /* FeedPresenterLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenterLogic.swift; sourceTree = "<group>"; };
+		9237E6182676D09000FC0FC8 /* FeedPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenterTests.swift; sourceTree = "<group>"; };
 		AE895442B9AD136910F840D1 /* Pods-Gifty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gifty.release.xcconfig"; path = "Target Support Files/Pods-Gifty/Pods-Gifty.release.xcconfig"; sourceTree = "<group>"; };
 		B9FE6B469A27ADE13DAAA67E /* Pods-GiftyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftyTests.release.xcconfig"; path = "Target Support Files/Pods-GiftyTests/Pods-GiftyTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE8A4AAA2B748A5F155EB096 /* Pods_GiftyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,10 +168,10 @@
 		9237E5D52674490100FC0FC8 /* GiftyTests */ = {
 			isa = PBXGroup;
 			children = (
+				9237E6182676D09000FC0FC8 /* FeedPresenterTests.swift */,
 				9237E60126745FB100FC0FC8 /* Utilities */,
 				9237E5FE26745C4B00FC0FC8 /* Resources */,
 				9237E5FC26745C4000FC0FC8 /* TrendingServiceTests.swift */,
-				9237E5D62674490100FC0FC8 /* GiftyTests.swift */,
 				9237E5D82674490100FC0FC8 /* Info.plist */,
 			);
 			path = GiftyTests;
@@ -545,10 +545,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9237E6192676D09000FC0FC8 /* FeedPresenterTests.swift in Sources */,
 				9237E60026745C6A00FC0FC8 /* MockURLProtocol.swift in Sources */,
 				9237E5FD26745C4000FC0FC8 /* TrendingServiceTests.swift in Sources */,
 				9237E6032674601B00FC0FC8 /* ServiceResponseStubber.swift in Sources */,
-				9237E5D72674490100FC0FC8 /* GiftyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
