@@ -11,7 +11,6 @@ import FLAnimatedImage
 class DetailViewController: UIViewController, RemoteImageLoader {
 
     @IBOutlet weak var imageView: FLAnimatedImageView!
-    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var gif: GifRawData?
@@ -23,8 +22,6 @@ class DetailViewController: UIViewController, RemoteImageLoader {
         
         activityIndicator.startAnimating()
         
-        closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
-        
         loadAnimatedImageFrom(urlString: gif?.images.downsizedLarge.url ?? "", on: imageView)
         
     }
@@ -32,33 +29,29 @@ class DetailViewController: UIViewController, RemoteImageLoader {
     func loadAnimatedImageFrom(urlString: String, on view: UIView) {
         guard let url = URL(string: urlString),
               let view = imageView else {
+            showError()
             return
         }
         
-        let token = imageLoader.loadImage(from: url, completion: { result in
-
-            self.token = token
+        token = imageLoader.loadImage(from: url, completion: { result in
             
-            do {
-                let image = try result.get()
-                DispatchQueue.main.async {
-                    if self.activityIndicator.isAnimating { self.activityIndicator.stopAnimating()}
-                    view.animatedImage = image
+            switch result {
+                case .success(let image):
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        view.animatedImage = image
+                    }
+            case .failure(_):
+                    self.showError()
                 }
-            } catch {
-                // TODO: Handle error case
-                // Here we could show a placeholder image.
-                debugPrint(error)
-            }
         })
         
     }
     
-    @objc func closeTapped() {
-        if let token = token {
-            imageLoader.cancelLoad(for: token)
-        }
-        self.dismiss(animated: true, completion: nil)
+    func showError() {
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        })
+        showAlert(with: ErrorText.title, message: ErrorText.message, style: .alert, actions: [okAction])
     }
-
 }

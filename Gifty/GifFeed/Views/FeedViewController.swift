@@ -49,6 +49,7 @@ extension FeedViewController {
             return UICollectionViewCell()
         }
         
+        print("IndexPath: \(indexPath)")
         
         if !isLoadingCell(for: indexPath) {
             
@@ -79,11 +80,11 @@ extension FeedViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let gif = presenter?.gifs[indexPath.row]
-        
+    
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let detailVC = storyboard.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return }
         detailVC.gif = gif
-        present(detailVC, animated: true, completion: nil)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
@@ -120,6 +121,7 @@ extension FeedViewController: GifDeliveryDelegate {
             }
             // On subsequent fetches, reload only the index paths
             // for the new photos
+            print("Reloading paths: \(pathsToReload)")
             self?.collectionView.reloadItems(at: pathsToReload)
         }
     }
@@ -132,7 +134,7 @@ extension FeedViewController: GifDeliveryDelegate {
         
         let ok: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         
-        showAlert(with: "Oops!", message: "Something went wrong. Please try again.", style: .alert, actions: [ok, tryAgain])
+        showAlert(with: ErrorText.title, message: ErrorText.message, style: .alert, actions: [ok, tryAgain])
     }
     
 }
