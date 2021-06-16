@@ -13,11 +13,6 @@ class GifCell: UICollectionViewCell {
     
     var onReuse: () -> Void = {}
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        backgroundColor = .black
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()

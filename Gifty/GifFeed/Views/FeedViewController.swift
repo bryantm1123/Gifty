@@ -128,13 +128,13 @@ extension FeedViewController: GifDeliveryDelegate {
     
     func didReceiveError() {
         if activityIndicator.isAnimating { activityIndicator.stopAnimating() }
-        let tryAgain: UIAlertAction = UIAlertAction(title: "Try Again", style: .default, handler: { action in
+        let tryAgain = UIAlertAction(title: "Try Again", style: .default, handler: { action in
             self.presenter?.getTrendingGifs()
         })
         
-        let ok: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         
-        showAlert(with: ErrorText.title, message: ErrorText.message, style: .alert, actions: [ok, tryAgain])
+        showAlert(with: ErrorText.title, message: ErrorText.message, style: .alert, actions: [okAction, tryAgain])
     }
     
 }

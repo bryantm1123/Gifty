@@ -20,11 +20,7 @@ extension UIViewController {
     
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         
-        if let actions = actions {
-            actions.forEach({
-                alert.addAction($0)
-            })
-        }
+        actions?.forEach({ alert.addAction($0)})
         
         present(alert, animated: true, completion: nil)
     }

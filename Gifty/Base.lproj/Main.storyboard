@@ -47,6 +47,7 @@
                                         <constraint firstAttribute="trailing" secondItem="toj-ma-DJI" secondAttribute="trailing" id="phj-OJ-mxr"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="gifImageView" destination="toj-ma-DJI" id="0gb-2S-TEK"/>
                                 </connections>
