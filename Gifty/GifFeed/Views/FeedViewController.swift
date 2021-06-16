@@ -153,15 +153,13 @@ extension FeedViewController {
         
         let token = imageLoader.loadImage(from: url, completion: { result in
             
-            do {
-                let image = try result.get()
+            switch result {
+            case .success(let image):
                 DispatchQueue.main.async {
                     cell.gifImageView.animatedImage = image
                 }
-            } catch {
-                // TODO: Handle error case
-                // Here we could show a placeholder image.
-                debugPrint(error)
+            case .failure(_):
+                break // just leave the black background as placeholder
             }
         })
         

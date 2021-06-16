@@ -41,7 +41,7 @@ class DetailViewController: UIViewController, RemoteImageLoader {
                         self.activityIndicator.stopAnimating()
                         view.animatedImage = image
                     }
-            case .failure(_):
+                case .failure(_):
                     self.showError()
                 }
         })
