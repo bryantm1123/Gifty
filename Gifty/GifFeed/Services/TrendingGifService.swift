@@ -54,7 +54,6 @@ extension TrendingGifService: TrendingGifServicable {
     
     
     func buildURL(with pageCount: Int, page: Int, rating: String?) -> URL? {
-        //let apiKey: String = "hUcbhS733eX7Z7b0fAIqD3in28886B7H"
         guard
             let apiKey: String = Bundle.main.object(forInfoDictionaryKey: "API_Key") as? String,
             let baseUrl: String = Bundle.main.object(forInfoDictionaryKey: "API_Base_URL") as? String else {
