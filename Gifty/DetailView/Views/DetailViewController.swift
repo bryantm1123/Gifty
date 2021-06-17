@@ -46,8 +46,10 @@ extension DetailViewController: ImageLoading {
             return
         }
         
-        token = imageLoader.loadImage(from: url, completion: { result in
-            
+        token = imageLoader.loadImage(from: url, completion: { [weak self] result in
+            guard let self = self else {
+                return
+            }
             switch result {
                 case .success(let image):
                     DispatchQueue.main.async {
@@ -55,7 +57,9 @@ extension DetailViewController: ImageLoading {
                         view.animatedImage = image
                     }
                 case .failure(_):
-                    self.showError()
+                    DispatchQueue.main.async {
+                        self.showError()
+                    }
                 }
         })
         

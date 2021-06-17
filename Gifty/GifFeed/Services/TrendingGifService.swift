@@ -56,7 +56,7 @@ class TrendingGifService {
                 URLQueryItem(name: "rating", value: rating),
                 URLQueryItem(name: "offset", value: "\(page)")
             ]
-        print("URL: \(components.url)")
+        
         return components.url
     }
     
@@ -64,8 +64,7 @@ class TrendingGifService {
         do {
             let decoded = try JSONDecoder().decode(TrendingGifResponse.self, from: data)
             return decoded
-        } catch let jsonError as NSError {
-            debugPrint(jsonError.localizedDescription)
+        } catch _ as NSError {
             return nil
         }
     }

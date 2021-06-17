@@ -108,29 +108,33 @@ extension GifFeedViewController: GifPresentationDelegate {
     
     func didReceiveGifs(with newIndexPathsToReload: [IndexPath]?) {
         DispatchQueue.main.async { [weak self] in
-            
-            if self?.activityIndicator.isAnimating ?? false { self?.activityIndicator.stopAnimating() }
-            
-            // Reload the whole collection view the first time
-            guard let pathsToReload = newIndexPathsToReload else {
-                self?.collectionView.reloadData()
+            guard let self = self else {
                 return
             }
-            // On subsequent fetches, reload only the index paths
-            // for the new photos
-            self?.collectionView.reloadItems(at: pathsToReload)
+            self.activityIndicator.stopAnimating()
+            
+            if let pathsToReload = newIndexPathsToReload {
+                self.collectionView.reloadItems(at: pathsToReload)
+            } else {
+                self.collectionView.reloadData()
+            }
         }
     }
     
     func didReceiveError() {
-        if activityIndicator.isAnimating { activityIndicator.stopAnimating() }
-        let tryAgain = UIAlertAction(title: "Try Again", style: .default, handler: { action in
-            self.presenter?.getTrendingGifs()
-        })
-        
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        
-        showAlert(with: ErrorText.title, message: ErrorText.message, style: .alert, actions: [okAction, tryAgain])
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.activityIndicator.stopAnimating()
+            let tryAgain = UIAlertAction(title: "Try Again", style: .default, handler: { action in
+                self.presenter?.getTrendingGifs()
+            })
+            
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            self.showAlert(with: ErrorText.title, message: ErrorText.message, style: .alert, actions: [okAction, tryAgain])
+        }
     }
     
 }
@@ -149,7 +153,9 @@ extension GifFeedViewController: ImageLoading {
     ///   - cell: The cell for the current index path which displays the gif
     func loadAnimatedImageFrom(urlString: String, on view: UIView) {
         guard let url = URL(string: urlString),
-              let cell = view as? GifCell else { return }
+              let cell = view as? GifCell else {
+            return
+        }
         
         let token = imageLoader.loadImage(from: url, completion: { result in
             

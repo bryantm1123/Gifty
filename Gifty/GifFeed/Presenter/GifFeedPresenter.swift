@@ -16,7 +16,7 @@ class GifFeedPresenter {
     private var pageLimit: Int = 25
     private var currentPage: Int = 0
     private var total: Int = 25
-    private var isRequestInProgress: Bool = false
+    private var requestIsInProgress: Bool = false
     private var rating: ContentRating = .g // this could be updated via a function powered by a filter option on the feed view controller. but for now, just hard-coding to family friendly content
     
     
@@ -33,7 +33,6 @@ class GifFeedPresenter {
         let endIndex = startIndex + newGifs.count
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
     }
-    
 }
 
 extension GifFeedPresenter: GifFeedPresentable {
@@ -42,22 +41,28 @@ extension GifFeedPresenter: GifFeedPresentable {
     
     func getTrendingGifs() {
         
-        guard !isRequestInProgress else { return }
-        print("Fetching page: \(currentPage)")
+        if requestIsInProgress {
+            return
+        } else {
+            requestIsInProgress = true
+        }
+        
         trendingService?.getTrending(with: pageLimit, page: currentPage, rating: rating.rawValue, completion: { result in
             switch result {
             case .success(let response):
                 self.currentPage += 1
             
                 self.total = response.pagination.totalCount
-                self.isRequestInProgress = false
+                self.requestIsInProgress = false
                 
                 // https://github.com/Giphy/GiphyAPI/issues/235
                 // I noticed that the /trending API returns some duplicates
                 // This temp fix below attempts to resolve duplicates within the same
                 // paginated response, but doesn't resolve duplicates
                 // in the master gif array.
-                guard let uniqueNewGifs = Array(NSOrderedSet(array: response.data)) as? [GifRawData] else { return }
+                guard let uniqueNewGifs = Array(NSOrderedSet(array: response.data)) as? [GifRawData] else {
+                    return
+                }
                 
                 self.gifs.append(contentsOf: uniqueNewGifs)
 
@@ -68,7 +73,7 @@ extension GifFeedPresenter: GifFeedPresentable {
                     self.gifDeliveryDelegate?.didReceiveGifs(with: .none)
                 }
             case .failure(_ ):
-                self.isRequestInProgress = false
+                self.requestIsInProgress = false
                 self.gifDeliveryDelegate?.didReceiveError()
             }
         })
