@@ -8,13 +8,12 @@
 import UIKit
 import FLAnimatedImage
 
-class DetailViewController: UIViewController, RemoteImageLoader {
+class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: FLAnimatedImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var gif: GifRawData?
-    var imageLoader: ImageLoader = ImageLoader()
     private var token: UUID?
     
     override func viewDidLoad() {
@@ -24,6 +23,20 @@ class DetailViewController: UIViewController, RemoteImageLoader {
         
         loadAnimatedImageFrom(urlString: gif?.images.downsizedLarge.url ?? "", on: imageView)
         
+    }
+    
+    func showError() {
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        })
+        showAlert(with: ErrorText.title, message: ErrorText.message, style: .alert, actions: [okAction])
+    }
+}
+
+extension DetailViewController: ImageLoading {
+    
+    var imageLoader: ImageLoader {
+        ImageLoader()
     }
     
     func loadAnimatedImageFrom(urlString: String, on view: UIView) {
@@ -46,12 +59,5 @@ class DetailViewController: UIViewController, RemoteImageLoader {
                 }
         })
         
-    }
-    
-    func showError() {
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
-            self.navigationController?.popViewController(animated: true)
-        })
-        showAlert(with: ErrorText.title, message: ErrorText.message, style: .alert, actions: [okAction])
     }
 }

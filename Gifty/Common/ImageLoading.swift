@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol RemoteImageLoader {
+protocol ImageLoading {
     var imageLoader: ImageLoader { get }
     
     func loadAnimatedImageFrom(urlString: String, on view: UIView)

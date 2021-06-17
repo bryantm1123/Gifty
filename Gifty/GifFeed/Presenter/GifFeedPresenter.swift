@@ -7,31 +7,43 @@
 
 import Foundation
 
-class FeedPresenter: FeedPresenterLogic {
+class GifFeedPresenter {
     
     var gifs: [GifRawData] = []
     
-    private weak var gifDeliveryDelegate: GifDeliveryDelegate?
-    private var trendingService: TrendingService?
+    private weak var gifDeliveryDelegate: GifPresentationDelegate?
+    private var trendingService: TrendingGifService?
     private var pageLimit: Int = 25
     private var currentPage: Int = 0
     private var total: Int = 25
     private var isRequestInProgress: Bool = false
     private var rating: ContentRating = .g // this could be updated via a function powered by a filter option on the feed view controller. but for now, just hard-coding to family friendly content
     
-    var totalCount: Int { total }
-    var currentCount: Int { gifs.count }
     
-    
-    init(with service: TrendingService, delegate: GifDeliveryDelegate) {
+    init(with service: TrendingGifService, delegate: GifPresentationDelegate) {
         self.trendingService = service
         self.gifDeliveryDelegate = delegate
     }
     
+    /// Calculates the index paths for the last page of gifs received from the API.
+    /// - Parameter newPhotos: The last page of gifs received
+    /// - Returns: The indexPaths to reload on the collection view
+    private func calculateIndexPathsToReload(from newGifs: [GifRawData]) -> [IndexPath] {
+        let startIndex = gifs.count - newGifs.count
+        let endIndex = startIndex + newGifs.count
+        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
+    }
+    
+}
+
+extension GifFeedPresenter: GifFeedPresentable {
+    var totalCount: Int { total }
+    var currentCount: Int { gifs.count }
+    
     func getTrendingGifs() {
         
         guard !isRequestInProgress else { return }
-        
+        print("Fetching page: \(currentPage)")
         trendingService?.getTrending(with: pageLimit, page: currentPage, rating: rating.rawValue, completion: { result in
             switch result {
             case .success(let response):
@@ -56,23 +68,9 @@ class FeedPresenter: FeedPresenterLogic {
                     self.gifDeliveryDelegate?.didReceiveGifs(with: .none)
                 }
             case .failure(_ ):
+                self.isRequestInProgress = false
                 self.gifDeliveryDelegate?.didReceiveError()
             }
         })
     }
-    
-    /// Calculates the index paths for the last page of gifs received from the API.
-    /// - Parameter newPhotos: The last page of gifs received
-    /// - Returns: The indexPaths to reload on the collection view
-    private func calculateIndexPathsToReload(from newGifs: [GifRawData]) -> [IndexPath] {
-        let startIndex = gifs.count - newGifs.count
-        let endIndex = startIndex + newGifs.count
-        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
-    }
-    
-}
-
-protocol GifDeliveryDelegate: AnyObject {
-    func didReceiveGifs(with newIndexPathsToReload: [IndexPath]?)
-    func didReceiveError()
 }

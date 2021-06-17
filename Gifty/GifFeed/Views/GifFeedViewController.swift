@@ -1,5 +1,5 @@
 //
-//  FeedViewController.swift
+//  GifFeedViewController.swift
 //  Gifty
 //
 //  Created by Matt Bryant on 6/11/21.
@@ -8,7 +8,7 @@
 import UIKit
 import FLAnimatedImage
 
-class FeedViewController: UICollectionViewController, RemoteImageLoader {
+class GifFeedViewController: UICollectionViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
@@ -20,9 +20,8 @@ class FeedViewController: UICollectionViewController, RemoteImageLoader {
       right: 20.0)
     
     
-    var presenter: FeedPresenter?
-    var service: TrendingService = TrendingService()
-    var imageLoader: ImageLoader = ImageLoader()
+    var presenter: GifFeedPresenter?
+    var service: TrendingGifService = TrendingGifService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,14 +29,14 @@ class FeedViewController: UICollectionViewController, RemoteImageLoader {
         collectionView.prefetchDataSource = self
         
         activityIndicator.startAnimating()
-        presenter = FeedPresenter(with: service, delegate: self)
+        presenter = GifFeedPresenter(with: service, delegate: self)
         presenter?.getTrendingGifs()
     }
 
 }
 
 // MARK: DataSource
-extension FeedViewController {
+extension GifFeedViewController {
       
       override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.totalCount ?? 0
@@ -48,8 +47,6 @@ extension FeedViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:reuseIdentifier, for:indexPath) as? GifCell else {
             return UICollectionViewCell()
         }
-        
-        print("IndexPath: \(indexPath)")
         
         if !isLoadingCell(for: indexPath) {
             
@@ -65,7 +62,7 @@ extension FeedViewController {
 }
 
 // MARK: Prefetching delegate
-extension FeedViewController: UICollectionViewDataSourcePrefetching {
+extension GifFeedViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         // Go ahead and pre-fetch next page photos
         // when we get to the loading cell
@@ -76,7 +73,7 @@ extension FeedViewController: UICollectionViewDataSourcePrefetching {
 }
 
 // MARK: Gif item selection
-extension FeedViewController {
+extension GifFeedViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let gif = presenter?.gifs[indexPath.row]
@@ -89,7 +86,7 @@ extension FeedViewController {
 }
 
 // MARK: Flow Layout
-extension FeedViewController: UICollectionViewDelegateFlowLayout {
+extension GifFeedViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
       return sectionInsets
@@ -107,7 +104,7 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: GifDeliveryDelegate
-extension FeedViewController: GifDeliveryDelegate {
+extension GifFeedViewController: GifPresentationDelegate {
     
     func didReceiveGifs(with newIndexPathsToReload: [IndexPath]?) {
         DispatchQueue.main.async { [weak self] in
@@ -121,7 +118,6 @@ extension FeedViewController: GifDeliveryDelegate {
             }
             // On subsequent fetches, reload only the index paths
             // for the new photos
-            print("Reloading paths: \(pathsToReload)")
             self?.collectionView.reloadItems(at: pathsToReload)
         }
     }
@@ -140,7 +136,11 @@ extension FeedViewController: GifDeliveryDelegate {
 }
 
 // MARK: Remote Image Loader
-extension FeedViewController {
+extension GifFeedViewController: ImageLoading {
+    
+    var imageLoader: ImageLoader {
+        ImageLoader()
+    }
     
     /// Loads an FLAnimatedImage from a remote url using the `ImageLoader` helper class
     /// Updates the cell's image view with the animated image retrieved
@@ -172,7 +172,7 @@ extension FeedViewController {
 }
 
 // MARK: Prefetching utility functions
-private extension FeedViewController {
+private extension GifFeedViewController {
     
     /// Determines if the current indexPath is beyond the current count of photos, ie the last cell
     /// - Parameter indexPath: The current index path to check

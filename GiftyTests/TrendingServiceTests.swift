@@ -10,11 +10,11 @@ import XCTest
 
 class TrendingServiceTests: XCTestCase, ServiceResponseStubber {
     
-    var sut: TrendingService?
+    var sut: TrendingGifService?
     let sampleResponseFile = "SampleTrendingResponse"
 
     override func setUpWithError() throws {
-        sut = TrendingService(with: MockURLProtocol.session)
+        sut = TrendingGifService(with: MockURLProtocol.session)
     }
 
     override func tearDownWithError() throws {

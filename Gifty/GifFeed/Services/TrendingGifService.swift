@@ -1,5 +1,5 @@
 //
-//  TrendingService.swift
+//  TrendingGifService.swift
 //  Gifty
 //
 //  Created by Matt Bryant on 6/11/21.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// Calls the Giphy /trending endpoint
-class TrendingService {
+class TrendingGifService {
     
     private var session: URLSession?
     
@@ -56,13 +56,13 @@ class TrendingService {
                 URLQueryItem(name: "rating", value: rating),
                 URLQueryItem(name: "offset", value: "\(page)")
             ]
-
+        print("URL: \(components.url)")
         return components.url
     }
     
-    private func decodeResponse(from data: Data) -> TrendingResponse? {
+    private func decodeResponse(from data: Data) -> TrendingGifResponse? {
         do {
-            let decoded = try JSONDecoder().decode(TrendingResponse.self, from: data)
+            let decoded = try JSONDecoder().decode(TrendingGifResponse.self, from: data)
             return decoded
         } catch let jsonError as NSError {
             debugPrint(jsonError.localizedDescription)
@@ -77,4 +77,4 @@ enum TrendingServiceError: Error {
     case decodingError
 }
 
-typealias TrendingServiceCompletion = (Result<TrendingResponse, Error>) -> Void
+typealias TrendingServiceCompletion = (Result<TrendingGifResponse, Error>) -> Void

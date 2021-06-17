@@ -10,8 +10,8 @@ import XCTest
 
 class FeedPresenterTests: XCTestCase, ServiceResponseStubber {
     
-    var sut: FeedPresenter?
-    var service: TrendingService?
+    var sut: GifFeedPresenter?
+    var service: TrendingGifService?
     var didReceiveGifsWasCalled: Bool = false
     var didReceiveErrorWasCalled: Bool = false
     let sampleResponseFile = "SampleTrendingResponse"
@@ -19,8 +19,8 @@ class FeedPresenterTests: XCTestCase, ServiceResponseStubber {
     
 
     override func setUpWithError() throws {
-        service = TrendingService(with: MockURLProtocol.session)
-        sut = FeedPresenter(with: service!, delegate: self)
+        service = TrendingGifService(with: MockURLProtocol.session)
+        sut = GifFeedPresenter(with: service!, delegate: self)
         expectation = XCTestExpectation(description: "Wait for mock service completion.")
     }
 
@@ -78,7 +78,7 @@ class FeedPresenterTests: XCTestCase, ServiceResponseStubber {
 
 }
 
-extension FeedPresenterTests: GifDeliveryDelegate {
+extension FeedPresenterTests: GifPresentationDelegate {
     
     func didReceiveGifs(with newIndexPathsToReload: [IndexPath]?) {
         didReceiveGifsWasCalled = true

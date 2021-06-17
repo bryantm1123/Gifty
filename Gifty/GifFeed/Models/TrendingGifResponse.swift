@@ -1,5 +1,5 @@
 //
-//  TrendingResponse.swift
+//  TrendingGifResponse.swift
 //  Gifty
 //
 //  Created by Matt Bryant on 6/11/21.
@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - TrendingResponse
-struct TrendingResponse: Codable {
+struct TrendingGifResponse: Codable {
     let data: [GifRawData]
     let pagination: Pagination
 }

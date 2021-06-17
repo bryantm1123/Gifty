@@ -7,7 +7,10 @@
 
 import Foundation
 
-protocol FeedPresenterLogic {
+protocol GifFeedPresentable {
     var gifs: [GifRawData] { get }
+    var totalCount: Int { get }
+    var currentCount: Int { get }
+    
     func getTrendingGifs()
 }
