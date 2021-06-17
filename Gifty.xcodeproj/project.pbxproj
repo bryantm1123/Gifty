@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		476ABC908A78DB4052995498 /* Pods_GiftyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8A4AAA2B748A5F155EB096 /* Pods_GiftyTests.framework */; };
-		542B25706080FD0148979D62 /* Pods_Gifty_GiftyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAD05CC2D1B75E464B847E2 /* Pods_Gifty_GiftyUITests.framework */; };
 		9237E5C0267448FF00FC0FC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5BF267448FF00FC0FC8 /* AppDelegate.swift */; };
 		9237E5C7267448FF00FC0FC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9237E5C5267448FF00FC0FC8 /* Main.storyboard */; };
 		9237E5C92674490100FC0FC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9237E5C82674490100FC0FC8 /* Assets.xcassets */; };
 		9237E5CC2674490100FC0FC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9237E5CA2674490100FC0FC8 /* LaunchScreen.storyboard */; };
-		9237E5E22674490100FC0FC8 /* GiftyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5E12674490100FC0FC8 /* GiftyUITests.swift */; };
 		9237E5F526744A5700FC0FC8 /* GifFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5F426744A5700FC0FC8 /* GifFeedViewController.swift */; };
 		9237E5F726744AA300FC0FC8 /* GifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5F626744AA300FC0FC8 /* GifCell.swift */; };
 		9237E5F92674520F00FC0FC8 /* TrendingGifResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9237E5F82674520F00FC0FC8 /* TrendingGifResponse.swift */; };
@@ -36,18 +34,12 @@
 		92A0C9D6267AFB360023517A /* MockRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0C9D5267AFB360023517A /* MockRequestHandler.swift */; };
 		92A0C9D8267AFE850023517A /* GifFeedPresenterUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0C9D7267AFE850023517A /* GifFeedPresenterUnitTests.swift */; };
 		92A0C9DA267AFFA80023517A /* TrendingGifServicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0C9D9267AFFA80023517A /* TrendingGifServicable.swift */; };
+		92A0C9DC267B09CB0023517A /* GifFeedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0C9DB267B09CB0023517A /* GifFeedDataSource.swift */; };
 		B7691DD01CA9A705A17B240E /* Pods_Gifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743273E24B19F88F02BABAE /* Pods_Gifty.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		9237E5D32674490100FC0FC8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9237E5B4267448FF00FC0FC8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9237E5BB267448FF00FC0FC8;
-			remoteInfo = Gifty;
-		};
-		9237E5DE2674490100FC0FC8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9237E5B4267448FF00FC0FC8 /* Project object */;
 			proxyType = 1;
@@ -68,9 +60,6 @@
 		9237E5CD2674490100FC0FC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9237E5D22674490100FC0FC8 /* GiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9237E5D82674490100FC0FC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9237E5DD2674490100FC0FC8 /* GiftyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiftyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9237E5E12674490100FC0FC8 /* GiftyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftyUITests.swift; sourceTree = "<group>"; };
-		9237E5E32674490100FC0FC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9237E5F426744A5700FC0FC8 /* GifFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifFeedViewController.swift; sourceTree = "<group>"; };
 		9237E5F626744AA300FC0FC8 /* GifCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCell.swift; sourceTree = "<group>"; };
 		9237E5F82674520F00FC0FC8 /* TrendingGifResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingGifResponse.swift; sourceTree = "<group>"; };
@@ -93,6 +82,7 @@
 		92A0C9D5267AFB360023517A /* MockRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRequestHandler.swift; sourceTree = "<group>"; };
 		92A0C9D7267AFE850023517A /* GifFeedPresenterUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifFeedPresenterUnitTests.swift; sourceTree = "<group>"; };
 		92A0C9D9267AFFA80023517A /* TrendingGifServicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingGifServicable.swift; sourceTree = "<group>"; };
+		92A0C9DB267B09CB0023517A /* GifFeedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifFeedDataSource.swift; sourceTree = "<group>"; };
 		AE895442B9AD136910F840D1 /* Pods-Gifty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gifty.release.xcconfig"; path = "Target Support Files/Pods-Gifty/Pods-Gifty.release.xcconfig"; sourceTree = "<group>"; };
 		B9FE6B469A27ADE13DAAA67E /* Pods-GiftyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftyTests.release.xcconfig"; path = "Target Support Files/Pods-GiftyTests/Pods-GiftyTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE8A4AAA2B748A5F155EB096 /* Pods_GiftyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,14 +108,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9237E5DA2674490100FC0FC8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				542B25706080FD0148979D62 /* Pods_Gifty_GiftyUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -144,7 +126,6 @@
 			children = (
 				9237E5BE267448FF00FC0FC8 /* Gifty */,
 				9237E5D52674490100FC0FC8 /* GiftyTests */,
-				9237E5E02674490100FC0FC8 /* GiftyUITests */,
 				9237E5BD267448FF00FC0FC8 /* Products */,
 				C2440FC6BB68C3BB2C1A2C58 /* Pods */,
 				52C5BEA3D3120734A95A04B1 /* Frameworks */,
@@ -156,7 +137,6 @@
 			children = (
 				9237E5BC267448FF00FC0FC8 /* Gifty.app */,
 				9237E5D22674490100FC0FC8 /* GiftyTests.xctest */,
-				9237E5DD2674490100FC0FC8 /* GiftyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,15 +168,6 @@
 				9237E5D82674490100FC0FC8 /* Info.plist */,
 			);
 			path = GiftyTests;
-			sourceTree = "<group>";
-		};
-		9237E5E02674490100FC0FC8 /* GiftyUITests */ = {
-			isa = PBXGroup;
-			children = (
-				9237E5E12674490100FC0FC8 /* GiftyUITests.swift */,
-				9237E5E32674490100FC0FC8 /* Info.plist */,
-			);
-			path = GiftyUITests;
 			sourceTree = "<group>";
 		};
 		9237E5EF267449FB00FC0FC8 /* GifFeed */ = {
@@ -234,6 +205,7 @@
 				9237E606267552F900FC0FC8 /* GifFeedPresenter.swift */,
 				9237E6162676CEA700FC0FC8 /* GifFeedPresentable.swift */,
 				92A0C9D1267AD2410023517A /* GifPresentationDelegate.swift */,
+				92A0C9DB267B09CB0023517A /* GifFeedDataSource.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -346,26 +318,6 @@
 			productReference = 9237E5D22674490100FC0FC8 /* GiftyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		9237E5DC2674490100FC0FC8 /* GiftyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9237E5EC2674490100FC0FC8 /* Build configuration list for PBXNativeTarget "GiftyUITests" */;
-			buildPhases = (
-				CD635019CBA61E7419BD0C17 /* [CP] Check Pods Manifest.lock */,
-				9237E5D92674490100FC0FC8 /* Sources */,
-				9237E5DA2674490100FC0FC8 /* Frameworks */,
-				9237E5DB2674490100FC0FC8 /* Resources */,
-				BA83C941B2ACB5DBC011F8F1 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9237E5DF2674490100FC0FC8 /* PBXTargetDependency */,
-			);
-			name = GiftyUITests;
-			productName = GiftyUITests;
-			productReference = 9237E5DD2674490100FC0FC8 /* GiftyUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -379,10 +331,6 @@
 						CreatedOnToolsVersion = 12.5;
 					};
 					9237E5D12674490100FC0FC8 = {
-						CreatedOnToolsVersion = 12.5;
-						TestTargetID = 9237E5BB267448FF00FC0FC8;
-					};
-					9237E5DC2674490100FC0FC8 = {
 						CreatedOnToolsVersion = 12.5;
 						TestTargetID = 9237E5BB267448FF00FC0FC8;
 					};
@@ -403,7 +351,6 @@
 			targets = (
 				9237E5BB267448FF00FC0FC8 /* Gifty */,
 				9237E5D12674490100FC0FC8 /* GiftyTests */,
-				9237E5DC2674490100FC0FC8 /* GiftyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -424,13 +371,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9237E6052674633000FC0FC8 /* SampleTrendingResponse.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9237E5DB2674490100FC0FC8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,45 +438,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BA83C941B2ACB5DBC011F8F1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gifty-GiftyUITests/Pods-Gifty-GiftyUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gifty-GiftyUITests/Pods-Gifty-GiftyUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gifty-GiftyUITests/Pods-Gifty-GiftyUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CD635019CBA61E7419BD0C17 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Gifty-GiftyUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -555,6 +456,7 @@
 				9237E5F726744AA300FC0FC8 /* GifCell.swift in Sources */,
 				9237E5F92674520F00FC0FC8 /* TrendingGifResponse.swift in Sources */,
 				9237E6172676CEA700FC0FC8 /* GifFeedPresentable.swift in Sources */,
+				92A0C9DC267B09CB0023517A /* GifFeedDataSource.swift in Sources */,
 				9237E607267552F900FC0FC8 /* GifFeedPresenter.swift in Sources */,
 				9237E60E2675751100FC0FC8 /* UIViewController+AlertExtension.swift in Sources */,
 				9237E61326769B7000FC0FC8 /* DetailViewController.swift in Sources */,
@@ -576,14 +478,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9237E5D92674490100FC0FC8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9237E5E22674490100FC0FC8 /* GiftyUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -591,11 +485,6 @@
 			isa = PBXTargetDependency;
 			target = 9237E5BB267448FF00FC0FC8 /* Gifty */;
 			targetProxy = 9237E5D32674490100FC0FC8 /* PBXContainerItemProxy */;
-		};
-		9237E5DF2674490100FC0FC8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9237E5BB267448FF00FC0FC8 /* Gifty */;
-			targetProxy = 9237E5DE2674490100FC0FC8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -823,48 +712,6 @@
 			};
 			name = Release;
 		};
-		9237E5ED2674490100FC0FC8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2339027186AB7F0E1A2C50CD /* Pods-Gifty-GiftyUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BV7A9X77F6;
-				INFOPLIST_FILE = GiftyUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.strongbeard.GiftyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Gifty;
-			};
-			name = Debug;
-		};
-		9237E5EE2674490100FC0FC8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 313202D8F213E071C0E01A58 /* Pods-Gifty-GiftyUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BV7A9X77F6;
-				INFOPLIST_FILE = GiftyUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.strongbeard.GiftyUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Gifty;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -891,15 +738,6 @@
 			buildConfigurations = (
 				9237E5EA2674490100FC0FC8 /* Debug */,
 				9237E5EB2674490100FC0FC8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9237E5EC2674490100FC0FC8 /* Build configuration list for PBXNativeTarget "GiftyUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9237E5ED2674490100FC0FC8 /* Debug */,
-				9237E5EE2674490100FC0FC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
