@@ -114,6 +114,9 @@ private extension GifFeedViewController {
 extension GifFeedViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        // WIP: Occasionally, tapping a gif leads to a different gif shown
+        // in the detail view. It seems to be an indexing problem, but I'm
+        // not entirely sure of the root cause just yet.
         let gif = presenter?.gifs[indexPath.row]
     
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
