@@ -26,7 +26,7 @@ class GifFeedPresenter {
     }
     
     /// Calculates the index paths for the last page of gifs received from the API.
-    /// - Parameter newPhotos: The last page of gifs received
+    /// - Parameter newGifs: The last page of gifs received
     /// - Returns: The indexPaths to reload on the collection view
     private func calculateIndexPathsToReload(from newGifs: [GifRawData]) -> [IndexPath] {
         let startIndex = gifs.count - newGifs.count
