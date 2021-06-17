@@ -8,12 +8,13 @@
 import Foundation
 
 protocol ServiceResponseStubber {
-    func getMockData(fileName: String, fileType: FileType, in bundle: Bundle) -> Data
-    func getMockResponse(with statusCode: Int) -> HTTPURLResponse
+    func getStubData(fileName: String, fileType: FileType, in bundle: Bundle) -> Data
+    func getStubResponse(with statusCode: Int) -> HTTPURLResponse
+    var stubError: Error { get }
 }
 
 extension ServiceResponseStubber {
-    func getMockData(fileName: String, fileType: FileType, in bundle: Bundle) -> Data {
+    func getStubData(fileName: String, fileType: FileType, in bundle: Bundle) -> Data {
         if let path = bundle.path(forResource: fileName, ofType: fileType.rawValue) {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
@@ -26,8 +27,12 @@ extension ServiceResponseStubber {
         return Data()
     }
     
-    func getMockResponse(with statusCode: Int) -> HTTPURLResponse {
+    func getStubResponse(with statusCode: Int) -> HTTPURLResponse {
         return HTTPURLResponse(url: URL(string: "my/api")!, statusCode: statusCode, httpVersion: "", headerFields: nil)!
+    }
+    
+    var stubError: Error {
+        NSError(domain: "stub", code: 0, userInfo: nil) as Error
     }
 }
 

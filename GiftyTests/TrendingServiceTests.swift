@@ -11,24 +11,25 @@ import XCTest
 class TrendingServiceTests: XCTestCase, ServiceResponseStubber {
     
     var sut: TrendingGifService?
+    var mockRequestHandler: MockRequestHandler?
     let sampleResponseFile = "SampleTrendingResponse"
+    
 
     override func setUpWithError() throws {
-        sut = TrendingGifService(with: MockURLProtocol.session)
+        mockRequestHandler = MockRequestHandler()
+        sut = TrendingGifService(with: mockRequestHandler!)
     }
 
     override func tearDownWithError() throws {
         sut = nil
+        mockRequestHandler = nil
     }
 
     func testDecodingOfSuccessfulResponse() throws {
         // Arrange
         let idExpected = "blSTtZehjAZ8I"
-        MockURLProtocol.requestHandler = { [self] mockRequest in
-            let response = getMockResponse(with: 200)
-            let data = getMockData(fileName: sampleResponseFile, fileType: .json, in: Bundle(for: type(of: self)))
-            return (response, data)
-        }
+        mockRequestHandler?.response = getStubResponse(with: 200)
+        mockRequestHandler?.data = getStubData(fileName: sampleResponseFile, fileType: .json, in: Bundle(for: type(of: self)))
         
         // Act
         sut?.getTrending(with: 25, page: 1, rating: "g", completion: { result in
@@ -45,12 +46,8 @@ class TrendingServiceTests: XCTestCase, ServiceResponseStubber {
     func testNetworkErrorOnNon200Response() throws {
         // Arrange
         let errorExpected = TrendingServiceError.networkError
-        
-        MockURLProtocol.requestHandler = { [self] mockRequest in
-            let response = getMockResponse(with: 400)
-            let data = "".data(using: .utf8)!
-            return (response, data)
-        }
+        mockRequestHandler?.response = getStubResponse(with: 400)
+        mockRequestHandler?.data = "".data(using: .utf8)!
         
         // Act
         sut?.getTrending(with: 25, page: 1, rating: "g", completion: { result in
@@ -68,12 +65,8 @@ class TrendingServiceTests: XCTestCase, ServiceResponseStubber {
     func testDecodingErrorWithMalformedPayload() throws {
         // Arrange
         let errorExpected = TrendingServiceError.decodingError
-        
-        MockURLProtocol.requestHandler = { [self] mockRequest in
-            let response = getMockResponse(with: 200)
-            let data = "malformedPayload".data(using: .utf8)!
-            return (response, data)
-        }
+        mockRequestHandler?.response = getStubResponse(with: 200)
+        mockRequestHandler?.data = "malformedPayload".data(using: .utf8)!
         
         // Act
         sut?.getTrending(with: 25, page: 1, rating: "g", completion: { result in

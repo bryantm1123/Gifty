@@ -12,7 +12,7 @@ class GifFeedPresenter {
     var gifs: [GifRawData] = []
     
     private weak var gifDeliveryDelegate: GifPresentationDelegate?
-    private var trendingService: TrendingGifService?
+    private var trendingService: TrendingGifServicable?
     private var pageLimit: Int = 25
     private var currentPage: Int = 0
     private var total: Int = 25
@@ -20,7 +20,7 @@ class GifFeedPresenter {
     private var rating: ContentRating = .g // this could be updated via a function powered by a filter option on the feed view controller. but for now, just hard-coding to family friendly content
     
     
-    init(with service: TrendingGifService, delegate: GifPresentationDelegate) {
+    init(with service: TrendingGifServicable, delegate: GifPresentationDelegate) {
         self.trendingService = service
         self.gifDeliveryDelegate = delegate
     }

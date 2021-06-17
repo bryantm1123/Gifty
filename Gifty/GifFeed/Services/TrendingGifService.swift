@@ -10,11 +10,23 @@ import Foundation
 /// Calls the Giphy /trending endpoint
 class TrendingGifService {
     
-    private var session: URLSession?
+    private var requestHandler: NetworkRequestHandling?
     
-    init(with session: URLSession = URLSession.shared) {
-        self.session = session
+    init(with requestHandler: NetworkRequestHandling = URLSession.shared) {
+        self.requestHandler = requestHandler
     }
+
+    private func decodeResponse(from data: Data) -> TrendingGifResponse? {
+        do {
+            let decoded = try JSONDecoder().decode(TrendingGifResponse.self, from: data)
+            return decoded
+        } catch _ as NSError {
+            return nil
+        }
+    }
+}
+
+extension TrendingGifService: TrendingGifServicable {
     
     func getTrending(with pageCount: Int, page: Int, rating: String?, completion: @escaping TrendingServiceCompletion) {
         guard let url = buildURL(with: pageCount, page: page, rating: rating) else {
@@ -22,7 +34,7 @@ class TrendingGifService {
             return
         }
         
-        let task = session?.dataTask(with: url) { (data, response, error) in
+        requestHandler?.performRequest(for: url, completionHandler: { (data, response, error) in
             guard let validResponse = response,
                   let code = (validResponse as? HTTPURLResponse)?.statusCode,
                   code == 200,
@@ -37,9 +49,7 @@ class TrendingGifService {
             }
             
             completion(.success(decoded))
-        }
-        
-        task?.resume()
+        })
     }
     
     
@@ -59,15 +69,6 @@ class TrendingGifService {
         
         return components.url
     }
-    
-    private func decodeResponse(from data: Data) -> TrendingGifResponse? {
-        do {
-            let decoded = try JSONDecoder().decode(TrendingGifResponse.self, from: data)
-            return decoded
-        } catch _ as NSError {
-            return nil
-        }
-    }
 }
 
 enum TrendingServiceError: Error {
@@ -75,5 +76,3 @@ enum TrendingServiceError: Error {
     case networkError
     case decodingError
 }
-
-typealias TrendingServiceCompletion = (Result<TrendingGifResponse, Error>) -> Void
