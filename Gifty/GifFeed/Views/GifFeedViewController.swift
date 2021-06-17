@@ -20,7 +20,7 @@ class GifFeedViewController: UICollectionViewController {
     
     
     var presenter: GifFeedPresenter?
-    var service: TrendingGifService = TrendingGifService()
+    var service: TrendingGifService = TrendingGifService(apiKey: APIConfigModel.apiKey, baseUrl: APIConfigModel.baseUrl)
     var dataSource: GifFeedDataSource?
 
     override func viewDidLoad() {

@@ -11,9 +11,13 @@ import Foundation
 class TrendingGifService {
     
     private var requestHandler: NetworkRequestHandling?
+    private var apiKey: String?
+    private var baseURL: String?
     
-    init(with requestHandler: NetworkRequestHandling = URLSession.shared) {
+    init(with requestHandler: NetworkRequestHandling = URLSession.shared, apiKey: String?, baseUrl: String?) {
         self.requestHandler = requestHandler
+        self.apiKey = apiKey
+        self.baseURL = baseUrl
     }
 
     private func decodeResponse(from data: Data) -> TrendingGifResponse? {
@@ -54,15 +58,10 @@ extension TrendingGifService: TrendingGifServicable {
     
     
     func buildURL(with pageCount: Int, page: Int, rating: String?) -> URL? {
-        guard
-            let apiKey: String = Bundle.main.object(forInfoDictionaryKey: "API_Key") as? String,
-            let baseUrl: String = Bundle.main.object(forInfoDictionaryKey: "API_Base_URL") as? String else {
-            return nil
-        }
-        
+    
         var components = URLComponents()
             components.scheme = "https"
-            components.host = baseUrl
+            components.host = baseURL
             components.path = "/v1/gifs/trending"
             components.queryItems = [
                 URLQueryItem(name: "api_key", value: apiKey),

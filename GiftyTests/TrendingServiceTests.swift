@@ -13,11 +13,12 @@ class TrendingServiceTests: XCTestCase, ServiceResponseStubber {
     var sut: TrendingGifService?
     var mockRequestHandler: MockRequestHandler?
     let sampleResponseFile = "SampleTrendingResponse"
-    
+    let apiKey = "xyz123"
+    let baseURL = "api.giphy.com"
 
     override func setUpWithError() throws {
         mockRequestHandler = MockRequestHandler()
-        sut = TrendingGifService(with: mockRequestHandler!)
+        sut = TrendingGifService(with: mockRequestHandler!, apiKey: apiKey, baseUrl: baseURL)
     }
 
     override func tearDownWithError() throws {
@@ -82,7 +83,7 @@ class TrendingServiceTests: XCTestCase, ServiceResponseStubber {
     
     func testBuildsValidURL() throws {
         // Arrange
-        let expectedURL = URL(string: "https://api.giphy.com/v1/gifs/trending?api_key=hUcbhS733eX7Z7b0fAIqD3in28886B7H&limit=25&rating=g&offset=1")
+        let expectedURL = URL(string: "https://api.giphy.com/v1/gifs/trending?api_key=xyz123&limit=25&rating=g&offset=1")
         
         // Act
         guard let url = sut?.buildURL(with: 25, page: 1, rating: "g") else {

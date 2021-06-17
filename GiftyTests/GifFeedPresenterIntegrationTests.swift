@@ -16,11 +16,13 @@ class GifFeedPresenterIntegrationTests: XCTestCase, ServiceResponseStubber {
     var didReceiveGifsWasCalled: Bool = false
     var didReceiveErrorWasCalled: Bool = false
     let sampleResponseFile = "SampleTrendingResponse"
+    let apiKey = "xyz123"
+    let baseURL = "api.giphy.com"
     
 
     override func setUpWithError() throws {
         mockRequestHandler = MockRequestHandler()
-        service = TrendingGifService(with: mockRequestHandler!)
+        service = TrendingGifService(with: mockRequestHandler!, apiKey: apiKey, baseUrl: baseURL)
         sut = GifFeedPresenter(with: service!, delegate: self)
     }
 

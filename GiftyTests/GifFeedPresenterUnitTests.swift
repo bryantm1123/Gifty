@@ -49,7 +49,6 @@ class GifFeedPresenterUnitTests: XCTestCase {
         XCTAssertTrue(didReceiveErrorWasCalled)
         XCTAssertFalse(didReceiveGifsWasCalled)
     }
-
 }
 
 extension GifFeedPresenterUnitTests: GifPresentationDelegate {

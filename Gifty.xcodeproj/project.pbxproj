@@ -35,6 +35,7 @@
 		92A0C9D8267AFE850023517A /* GifFeedPresenterUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0C9D7267AFE850023517A /* GifFeedPresenterUnitTests.swift */; };
 		92A0C9DA267AFFA80023517A /* TrendingGifServicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0C9D9267AFFA80023517A /* TrendingGifServicable.swift */; };
 		92A0C9DC267B09CB0023517A /* GifFeedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0C9DB267B09CB0023517A /* GifFeedDataSource.swift */; };
+		92A0C9E0267B53190023517A /* APIConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0C9DF267B53190023517A /* APIConfigModel.swift */; };
 		B7691DD01CA9A705A17B240E /* Pods_Gifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743273E24B19F88F02BABAE /* Pods_Gifty.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		92A0C9D9267AFFA80023517A /* TrendingGifServicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingGifServicable.swift; sourceTree = "<group>"; };
 		92A0C9DB267B09CB0023517A /* GifFeedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifFeedDataSource.swift; sourceTree = "<group>"; };
 		92A0C9DD267B2DA60023517A /* APIConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APIConfig.xcconfig; sourceTree = "<group>"; };
+		92A0C9DF267B53190023517A /* APIConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigModel.swift; sourceTree = "<group>"; };
 		AE895442B9AD136910F840D1 /* Pods-Gifty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gifty.release.xcconfig"; path = "Target Support Files/Pods-Gifty/Pods-Gifty.release.xcconfig"; sourceTree = "<group>"; };
 		B9FE6B469A27ADE13DAAA67E /* Pods-GiftyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiftyTests.release.xcconfig"; path = "Target Support Files/Pods-GiftyTests/Pods-GiftyTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE8A4AAA2B748A5F155EB096 /* Pods_GiftyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiftyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +219,7 @@
 			children = (
 				9237E5FA267453FA00FC0FC8 /* TrendingGifService.swift */,
 				92A0C9D9267AFFA80023517A /* TrendingGifServicable.swift */,
+				92A0C9DF267B53190023517A /* APIConfigModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				9237E60E2675751100FC0FC8 /* UIViewController+AlertExtension.swift in Sources */,
 				9237E61326769B7000FC0FC8 /* DetailViewController.swift in Sources */,
 				9237E61526769DFE00FC0FC8 /* ImageLoading.swift in Sources */,
+				92A0C9E0267B53190023517A /* APIConfigModel.swift in Sources */,
 				9237E60C267569CD00FC0FC8 /* ImageLoader.swift in Sources */,
 				92A0C9D4267AFA100023517A /* NetworkRequestHandling.swift in Sources */,
 			);
