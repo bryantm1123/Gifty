@@ -10,7 +10,7 @@ My chosen architecture for this project is Model-View-Presenter.
 
 In this architecture, we'll have a model layer that is updated by a service, a presentation layer that uses the service to reach the model and transforms it into a presentable format for the view layer, and the view layer which is responsible for displaying our transformed model. Similar to MVVM, the view controller is considered part of the view layer and should contain no model logic. Instead, that responsibility is shifted to the Presenter.
 
-The implementation in this project makes use of a delegate to communicate the result of the Presenter to the view layer. If communication were required from the view layer to the Presenter, such as in the case a user entered text on a text field for example, a delegate could also be used to transmit the updated text back through the Presenter and on to the model.
+The implementation in this project makes use of a delegate to communicate the result of the Presenter to the view layer. If communication were required from the view layer to the Presenter, such as if we needed to capture user input into a text field for example, a delegate could also be used to transmit the updated text back through the Presenter and on to the model.
 
 This delegate pattern of object communication serves a similar function to data binding and observables in MVVM. 
 
