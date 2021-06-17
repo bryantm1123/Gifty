@@ -114,7 +114,8 @@ extension GifFeedViewController: GifPresentationDelegate {
             self.activityIndicator.stopAnimating()
             
             if let pathsToReload = newIndexPathsToReload {
-                self.collectionView.reloadItems(at: pathsToReload)
+                let visiblePaths = self.visibleIndexPathsToReload(intersecting: pathsToReload)
+                self.collectionView.reloadItems(at: visiblePaths)
             } else {
                 self.collectionView.reloadData()
             }
