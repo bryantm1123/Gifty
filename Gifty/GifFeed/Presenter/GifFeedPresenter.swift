@@ -50,9 +50,24 @@ extension GifFeedPresenter: GifFeedPresentable {
         trendingService?.getTrending(with: pageLimit, page: currentPage, rating: rating.rawValue, completion: { result in
             switch result {
             case .success(let response):
+                
+                // https://github.com/Giphy/GiphyAPI/issues/22
+                // https://github.com/Giphy/GiphyAPI/issues/31
+                // I'm not sure exactly what to take from the replies on
+                // these two issues, but what I observed was an inconsistency
+                // of the value returned for the pagination total count.
+                // This led to a collection view internal inconsistency error,
+                // as my pagination method depends on the total count, setting it as
+                // the collection view number of items. When different values are returned,
+                // it breaks the collection view's ability to reload at visible paths and just does a
+                // full reload which makes the UI jumpy.
+                // The following line is a hack to just get the total count from the first pagination
+                // response and use it rather than updating the local total variable from each response
+                // payload to keep the total count constant for the collection view's sake.
+                if response.pagination.offset == 0 { self.total = response.pagination.totalCount }
+                
                 self.currentPage += 1
-            
-                self.total = response.pagination.totalCount
+        
                 self.requestIsInProgress = false
                 
                 // https://github.com/Giphy/GiphyAPI/issues/235

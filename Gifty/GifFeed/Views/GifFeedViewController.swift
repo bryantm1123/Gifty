@@ -40,6 +40,11 @@ class GifFeedViewController: UICollectionViewController {
 // MARK: Flow Layout
 extension GifFeedViewController: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let numberOfSpacingColumns: CGFloat = 4.0
+        return CGSize(width: self.view.frame.width / numberOfSpacingColumns, height: self.view.frame.width / numberOfSpacingColumns)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
       return sectionInsets
     }
