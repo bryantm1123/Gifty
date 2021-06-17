@@ -22,7 +22,14 @@ As this is a fairly simple project, with limited user input, and simple navigati
 * An API key, which can be obtained by [registering an app with Giphy.](https://developers.giphy.com/dashboard/?create=true)
 
 ## Requirements
-To successfully connect to the API, place your API key in the included [APIConfig.xcconfig](https://github.com/bryantm1123/Gifty/blob/master/Gifty/APIConfig.xcconfig) file, in the API_KEY field:
+* Place your API key in the included [APIConfig.xcconfig](https://github.com/bryantm1123/Gifty/blob/master/Gifty/APIConfig.xcconfig) file, in the API_KEY field:
 
-`API_KEY = {YOUR_API_KEY_GOES_HERE}`
+    `API_KEY = {YOUR_API_KEY_GOES_HERE}`
+
+* iOS Deployment target: 14.5
+* Xcode 12.5+
+
+## Known Issues/Challenges
+* **Duplicate Gifs**: Mentioned in [GifFeedPresenter.swift](https://github.com/bryantm1123/Gifty/blob/master/Gifty/GifFeed/Presenter/GifFeedPresenter.swift) lines 73 - 80 with link to relevant Github issue. I first noticed duplicates when testing the UI, and after checking the app code, I used [Postman](https://www.postman.com) and [Proxyman](https://proxyman.io) to debug the API response and found that there are indeed occasionally duplicates returned from the API.
+* **Inconsistent Pagination Total**: Mentioned in [GifFeedPresenter.swift](https://github.com/bryantm1123/Gifty/blob/master/Gifty/GifFeed/Presenter/GifFeedPresenter.swift) lines 54 - 67 with link to relevant Github issues. This one was a fun debugging challenge 😁. The handle pagination, the app uses a combination of pre-fetching and reloading an intersection of a new page's indexPaths and the collectionView's visible index paths to provide a continuous scrolling experience, as laid out in [this great tutorial](https://www.raywenderlich.com/5786-uitableview-infinite-scrolling-tutorial). A key component for this methodology is tracking the total count of items available from the service (GifFeedPresenter line 67, [GifFeedDataSource](https://github.com/bryantm1123/Gifty/blob/master/Gifty/GifFeed/Presenter/GifFeedDataSource.swift) line 33) and using it to inform the collectionview data source's number of items. My initial implementation had the presenter's count tracking variable update with each new request. But this lead to internal inconsistency errors from the collection view's updating. The root cause turned out to be the slight variations between total_count values returned by multiple requests to the service. This may or may not be expected behavior, I couldn't really tell for sure from the responses to the linked Github issues, so I put in a fix that sets the GifFeedPresenter's count tracker from the first request.
 
