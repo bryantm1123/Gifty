@@ -26,7 +26,7 @@ class GifFeedDataSource: NSObject {
     
 }
 
-// MARK: CollectionView DataSource 
+// MARK: CollectionView DataSource
 extension GifFeedDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,7 +39,6 @@ extension GifFeedDataSource: UICollectionViewDataSource {
         }
         
         if !isLoadingCell(for: indexPath) {
-            
             let gif = presenter?.gifs[indexPath.row]
             
             if let urlString = gif?.images.fixedWidth.url {
