@@ -14,7 +14,7 @@ The implementation in this project makes use of a delegate to communicate the re
 
 This delegate pattern of object communication serves a similar function to data binding and observables in MVVM. 
 
-As this is a fairly simple project, with limited user input, and simple navigation, I opted for MVP to acheive desired code separation, and for the simplicity of implementating the delegate communication pattern. 
+As this is a fairly small project, with limited user input and navigation, I opted for MVP to acheive desired code separation, and for the simplicity of implementating the delegate communication pattern. 
 
 ## Dependencies
 * [Cocoapods](https://cocoapods.org)
