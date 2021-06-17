@@ -11,7 +11,7 @@ class GifFeedPresenter {
     
     var gifs: [GifRawData] = []
     
-    private weak var gifDeliveryDelegate: GifPresentationDelegate?
+    private weak var gifPresentationDelegate: GifPresentationDelegate?
     private var trendingService: TrendingGifServicable?
     private var pageLimit: Int = 25
     private var currentPage: Int = 0
@@ -22,7 +22,7 @@ class GifFeedPresenter {
     
     init(with service: TrendingGifServicable, delegate: GifPresentationDelegate) {
         self.trendingService = service
-        self.gifDeliveryDelegate = delegate
+        self.gifPresentationDelegate = delegate
     }
     
     /// Calculates the index paths for the last page of gifs received from the API.
@@ -64,7 +64,9 @@ extension GifFeedPresenter: GifFeedPresentable {
                 // The following line is a hack to just get the total count from the first pagination
                 // response and use it rather than updating the local total variable from each response
                 // payload to keep the total count constant for the collection view's sake.
-                if response.pagination.offset == 0 { self.total = response.pagination.totalCount }
+                if response.pagination.offset == 0 && response.pagination.totalCount > 0 {
+                    self.total = response.pagination.totalCount
+                }
                 
                 self.currentPage += 1
         
@@ -83,13 +85,13 @@ extension GifFeedPresenter: GifFeedPresentable {
 
                 if response.pagination.offset > 0 {
                     let pathsToReload = self.calculateIndexPathsToReload(from: uniqueNewGifs)
-                    self.gifDeliveryDelegate?.didReceiveGifs(with: pathsToReload)
+                    self.gifPresentationDelegate?.didReceiveGifs(with: pathsToReload)
                 } else {
-                    self.gifDeliveryDelegate?.didReceiveGifs(with: .none)
+                    self.gifPresentationDelegate?.didReceiveGifs(with: .none)
                 }
             case .failure(_ ):
                 self.requestIsInProgress = false
-                self.gifDeliveryDelegate?.didReceiveError()
+                self.gifPresentationDelegate?.didReceiveError()
             }
         })
     }
