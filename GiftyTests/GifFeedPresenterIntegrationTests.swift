@@ -37,7 +37,7 @@ class GifFeedPresenterIntegrationTests: XCTestCase, ServiceResponseStubber {
         // Act
         sut?.getTrendingGifs()
         
-        // Then
+        // Assert
         XCTAssertTrue(didReceiveGifsWasCalled)
         XCTAssertFalse(didReceiveErrorWasCalled)
     }
@@ -50,7 +50,7 @@ class GifFeedPresenterIntegrationTests: XCTestCase, ServiceResponseStubber {
         // Act
         sut?.getTrendingGifs()
         
-        // Then
+        // Assert
         XCTAssertTrue(didReceiveErrorWasCalled)
         XCTAssertFalse(didReceiveGifsWasCalled)
     }
