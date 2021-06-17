@@ -1,0 +1,9 @@
+//
+//  APIConfig.xcconfig
+//  Gifty
+//
+//  Created by Matt Bryant on 6/17/21.
+//
+
+API_KEY = {YOUR_API_KEY_GOES_HERE}
+API_BASE_URL = api.giphy.com
