@@ -28,7 +28,7 @@ To handle pagination, the app uses a combination of pre-fetching and reloading a
 
     `API_KEY = {YOUR_API_KEY_GOES_HERE}`
 
-* iOS Deployment target: 14.5
+* iOS Deployment target: 11.0
 * Xcode 12.5+
 
 ## Known Issues/Challenges
