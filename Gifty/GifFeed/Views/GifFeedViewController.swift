@@ -120,8 +120,16 @@ extension GifFeedViewController {
         let gif = presenter?.gifs[indexPath.row]
     
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let detailVC = storyboard.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return }
-        detailVC.gif = gif
-        navigationController?.pushViewController(detailVC, animated: true)
+        
+        if #available(iOS 13.0, *) {
+            guard let detailVC = storyboard.instantiateViewController(identifier: "DetailViewController") as? DetailViewController else { return }
+            detailVC.gif = gif
+            navigationController?.pushViewController(detailVC, animated: true)
+        } else {
+            // Fallback on earlier versions
+            guard let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+            detailVC.gif = gif
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }
