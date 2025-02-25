@@ -1,5 +1,5 @@
 # Gifty
-Gifty is a simple gif browser connected to the [Giphy /trending API](https://developers.giphy.com/docs/api/endpoint#trending). Browse gifs and tap your favorites to see them in full screen.
+Gifty is a simple gif browser connected to the [Giphy API's Trending endpoint](https://developers.giphy.com/docs/api/endpoint#trending). Browse gifs and tap your favorites to see them in full screen.
 
 <img src="https://github.com/bryantm1123/Gifty/blob/screenshots/Screenshots/GiftyBrowser.PNG" width="207" height="448"><img src="https://github.com/bryantm1123/Gifty/blob/screenshots/Screenshots/GiftyDetail.PNG" width="207" height="448">
 
@@ -30,8 +30,3 @@ To handle pagination, the app uses a combination of pre-fetching and reloading a
 
 * iOS Deployment target: 14.5
 * Xcode 12.5+
-
-## Known Issues/Challenges
-* **Duplicate Gifs**: Mentioned in [GifFeedPresenter.swift](https://github.com/bryantm1123/Gifty/blob/master/Gifty/GifFeed/Presenter/GifFeedPresenter.swift) lines 73 - 80 with link to relevant Github issue. I first noticed duplicates when testing the UI, and after checking the app code, I used [Postman](https://www.postman.com) and [Proxyman](https://proxyman.io) to debug the API response and found that there are indeed occasionally duplicates returned from the API.
-* **Inconsistent Pagination Total**: Mentioned in [GifFeedPresenter.swift](https://github.com/bryantm1123/Gifty/blob/master/Gifty/GifFeed/Presenter/GifFeedPresenter.swift) lines 54 - 67 with link to relevant Github issues. This one was a fun debugging challenge 😁. In the pagination strategy mentioned above, a key component is tracking the total count of items available from the service (GifFeedPresenter line 67, [GifFeedDataSource](https://github.com/bryantm1123/Gifty/blob/master/Gifty/GifFeed/Presenter/GifFeedDataSource.swift) line 33) and using it to inform the collectionview data source's number of items. My initial implementation had the presenter's count tracking variable update with each new request. But this lead to internal inconsistency errors from the collection view's attempt to reload our new calculated indexPaths. The root cause turned out to be the slight variations between total_count values returned by different requests to the service. This may or may not be expected behavior, I couldn't really tell for sure from the responses to the linked Github issues, so I put in a fix that sets the GifFeedPresenter's count tracker from the first request.
-* **Indexing incorrect image** Mentioned in [GifFeedViewController](https://github.com/bryantm1123/Gifty/blob/master/Gifty/GifFeed/Views/GifFeedViewController.swift) lines 115 - 126. In some semi-rare cases I've noticed that tapping on a gif can show a different gif in the detail view. There seems to be an indexing issue or perhaps cell re-use issue at play. The cell's prepare for reuse method is being called seemingly when it should and the cells seem to be updating as expected during the scroll. With duplicates occasionally returning from the API, there may be an underlying re-use issue that is a little harder to spot.
